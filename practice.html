@@ -1,11 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <script></script>
-  </body>
+<html>
+
+<head></head>
+
+<body>
+  <button onclick="playGame('heads')">Heads</button>
+  <button onclick=" playGame('tails')">Tails</button>
+  <button
+    onclick="localStorage.clear(); result.win=0; result.lose=0; localStorage.setItem('result', JSON.stringify(result)); console.log(result);">Reset
+    Game</button>
+  <script>
+    const result = JSON.parse(localStorage.getItem("result")) || {
+      win: 0,
+      lose: 0
+    };
+
+
+    console.log(result);
+
+
+    function playGame(guess) {
+      const randomNumber = Math.random();
+      const computerGuess = randomNumber < 0.5 ? "heads" : "tails";
+      if (guess === computerGuess) {
+
+        result.win++;
+      } else {
+        result.lose++;
+      }
+
+      localStorage.setItem("result", JSON.stringify(result));
+      console.log(result);
+      console.log(guess === computerGuess ? "You win!" : "You lose!");
+    }
+  </script>
+</body>
+
 </html>
