@@ -1,76 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Cart Quantity</title>
   </head>
   <body>
+    <button
+      onclick="
+      showQuantity(cartQuantity);
+    "
+    >
+      Show Quantity
+    </button>
+
+    <button
+      onclick="
+      updateCart(1)
+    "
+    >
+      Add to Cart
+    </button>
+
+    <button
+      onclick="
+      updateCart(2)
+    "
+    >
+      +2
+    </button>
+
+    <button
+      onclick="
+      updateCart(3)
+    "
+    >
+      +3
+    </button>
+
+    <button
+      onclick="
+      updateCart(4)
+    "
+    >
+      +4
+    </button>
+
+    <button
+      onclick="
+      updateCart(5)
+    "
+    >
+      +5
+    </button>
+
+    <!-- vvv This code was changed. vvv -->
+    <button
+      onclick="
+      updateCart(-1)
+    "
+    >
+      Remove from cart
+    </button>
+
+    <button
+      onclick="
+      updateCart(-2)
+    "
+    >
+      -2
+    </button>
+
+    <button
+      onclick="
+      updateCart(-3)
+    "
+    >
+      -3
+    </button>
+    <!-- ^^^ This code was changed. ^^^ -->
+
+    <button
+      onclick="
+      resetCart();
+    "
+    >
+      Reset Cart
+    </button>
+
     <script>
-      greet("Ali Akbar");
-      function greet(name) {
-        if (!name) {
-          return;
-        }
-        console.log(`Hello ${name}`);
-      }
-      console.log(convertToFahrenheit(25));
+      let cartQuantity = 0;
 
-      function convertToFahrenheit(celcius) {
-        return (celcius * 9) / 5 + 32;
+      function showQuantity(cartQuantity) {
+        console.log(`Cart quantity: ${cartQuantity}`);
       }
 
-      console.log(convertToCelcius(77));
-      function convertToCelcius(fahrenheit) {
-        return ((fahrenheit - 32) * 5) / 9;
+      function resetCart() {
+        cartQuantity = 0;
+        console.log("Cart was reset.");
+        console.log(`Cart quantity: ${cartQuantity}`);
+        return cartQuantity;
       }
 
-      console.log(convertTemperatures(25, "C"));
-      console.log(convertTemperatures(77, "F"));
-      console.log(convertTemperatures());
-
-      function convertTemperatures(degree, unit) {
-        if (!unit || !degree) {
-          return "Missing parameters";
-        } else if (unit.toLowerCase() === "c") {
-          return convertToFahrenheit(degree);
-        } else if (unit.toLowerCase() === "f") {
-          return convertToCelcius(degree);
-        }
-      }
-
-      console.log(convertLength(32, "km", "miles"));
-      console.log(convertLength(50, "miles", "km"));
-      console.log(convertLength(50, "km", "km"));
-      console.log(convertLength(50, "miles", "miles"));
-      console.log(convertLength(50, "miles", "les"));
-      console.log(convertLength(5, "miles", "ft"));
-      console.log(convertLength(5, "km", "ft"));
-
-      function convertLength(length, from, to) {
-        if (!length || !from || !to) {
-          return "Missing Parameters";
-        } else if (
-          from.toLowerCase() === "km" &&
-          to.toLowerCase() === "miles"
-        ) {
-          return `${length} ${from} = ${length / 1.6} ${to}`;
-        } else if (
-          from.toLowerCase() === "miles" &&
-          to.toLowerCase() === "km"
-        ) {
-          return `${length} ${from} = ${length * 1.6} ${to}`;
-        } else if (
-          from.toLowerCase() === "miles" &&
-          to.toLowerCase() === "ft"
-        ) {
-          return `${length} ${from} = ${length * 5280} ${to}`;
-        } else if (from.toLowerCase() === "km" && to.toLowerCase() === "ft") {
-          return `${length} ${from} = ${length * 3281} ${to}`;
-        } else if (from.toLowerCase() === to.toLowerCase()) {
-          return `${length} ${from} = ${length} ${to}`;
+      function updateCart(number) {
+        if (number > 0) {
+          if (cartQuantity + number > 10) {
+            alert("The cart is full");
+            return;
+          } else {
+            cartQuantity = number + cartQuantity;
+            console.log(`Cart quantity: ${cartQuantity}`);
+            return;
+          }
         } else {
-          return "Invalid parameters";
+          if (cartQuantity + number < 0) {
+            alert("Not enough items in the cart");
+            return;
+          } else {
+            cartQuantity = cartQuantity + number;
+            console.log(`Cart quantity: ${cartQuantity}`);
+            return;
+          }
         }
       }
     </script>
