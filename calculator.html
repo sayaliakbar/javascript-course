@@ -34,12 +34,17 @@
       </button>
       <button onclick="numberStore('/')">/</button>
     </p>
-    <button onclick="calculation=''; console.log('Cleared!')">Clear</button>
+    <button
+      onclick="localStorage.clear(); calculation=''; console.log('Cleared!')"
+    >
+      Clear
+    </button>
     <script>
-      let calculation = "";
+      let calculation = localStorage.getItem("calculation") || "";
+      console.log(calculation);
       function numberStore(number) {
-        calculation += number;
-        console.log(calculation);
+        localStorage.setItem("calculation", (calculation += number));
+        console.log(localStorage.getItem("calculation"));
       }
     </script>
   </body>
